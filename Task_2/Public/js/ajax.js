@@ -1,4 +1,4 @@
-var container = [];
+
 $(document).ready(function () {
 
 
@@ -8,25 +8,26 @@ $(document).ready(function () {
     };
 
     $.ajax(request_one).done(function (response) {
-        container.push(response.rates);
-        console.log(container[0]);
 
-        /* it would go like */
-        /* get values for selecting two currencies */
-        /* then typing value */
-        /* and lastly multiplying numbers */
-        /* I usually write code really slow, sorry for that */
+        for (var i in response.rates) {
+            var opt = new Option(i, response.rates[i]);
+            $(opt).html(i, response.rates[i]);
+            $("#currency").append(opt);
 
-        /*for (var i in response.rates) {
-            /!*var o = new Option(response.rates[i]);
-            $(o).html(response.rates[i]);
-            $("#currency").append(o);*!/
-            console.log(response.rates.getOwnPropertyNames(rates[i]))
-            console.log(response.rates[i]);
-            categories.push(response.rates);
-        }*/
-        /*console.log(response.rates);*/
+            var o = new Option(i, response.rates[i]);
+            $(o).html(i, response.rates[i]);
+            $("#currency_2").append(o);
+        }
 
-    }); // I'm so sorry i'm a slow writer couldn't fit in time... SORRY
+    });
+
+    $("#button").click( function() {
+            var curr_1 = $('#currency')[0].value;
+            var curr_2 = $('#currency_2')[0].value;
+            var amount = $('#text').val();
+
+            console.log('Result is: ' + amount * curr_2 / curr_1);
+        }
+    );
 
 });
